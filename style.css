@@ -1,0 +1,110 @@
+@font-face {
+   font-family: 'HeydingsControlsRegular';
+   src: url('fonts/heydings_controls-webfont.eot');
+   src: url('fonts/heydings_controls-webfont.eot?#iefix') format('embedded-opentype'),
+        url('fonts/heydings_controls-webfont.woff') format('woff'),
+        url('fonts/heydings_controls-webfont.ttf') format('truetype');
+   font-weight: normal;
+   font-style: normal;
+}
+
+.reproductor{
+    width: 500px;
+    margin: 20px auto;
+    padding: 5px;
+    background: #999999;
+    border: 1px solid #666666;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+.playlist{
+    width: 300px;
+    height: 400px;
+    overflow-y: auto;
+    margin: 10px auto;
+    padding: 5px;
+    border: 1px solid #666666;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.centrado {
+    text-align: center;
+}
+
+#list {
+    list-style: none;
+}
+
+#list li button{
+    border: none;
+    background: white;
+}
+
+#list button:hover {
+    /*padding: 2px 7px;*/
+    color: whitesmoke;
+    border-bottom: 1px solid darkred;
+    background: darkblue;
+    cursor: pointer;
+}
+
+#list li .active {
+    border-bottom: 1px solid;
+    background: lightblue;
+}
+
+.controls {
+  visibility: hidden;
+  opacity: 0.5;
+  width: 400px;
+  border-radius: 10px;
+  position: relative;
+  bottom: 20px;
+  left: 50%;
+  margin-left: -200px;
+  background-color: black;
+  box-shadow: 3px 3px 5px black;
+  transition: 1s all;
+  display: flex;
+}
+
+.player:hover .controls, player:focus .controls {
+  opacity: 1;
+}
+
+button:before {
+  font-family: HeydingsControlsRegular;
+  font-size: 20px;
+  position: relative;
+  content: attr(data-icon);
+  color: #aaa;
+  text-shadow: 1px 1px 0px black;
+}
+.timer {
+  line-height: 38px;
+  font-size: 10px;
+  font-family: monospace;
+  text-shadow: 1px 1px 0px black;
+  color: white;
+  flex: 5;
+  position: relative;
+}
+
+.timer div {
+  position: absolute;
+  background-color: rgba(255,255,255,0.2);
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 38px;
+  z-index: 2;
+}
+
+.timer span {
+  position: absolute;
+  z-index: 3;
+  left: 19px;
+}
