@@ -8,8 +8,36 @@
    font-style: normal;
 }
 
+.reproductor h5{
+  height: 30px;
+}
+
+section{
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 450px;
+}
+
+video{
+  width: 100%;
+  height: 100%;
+  max-height: calc(100vh - 102px);
+}
 .reproductor{
-    width: 500px;
+  background: silver;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 30px 1fr 7px 38px;
+  border: 1px solid #666666;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  grid-row-gap: 15px;
+  padding: 20px;
+  box-sizing: border-box;
+    /*width: 500px;
     margin: 20px auto;
     padding: 5px;
     background: silver;
@@ -17,14 +45,23 @@
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    box-sizing: border-box;
+    box-sizing: border-box;*/
 }
 
-.player{
-    width: 100%;
+.fila1{
+  width: 1fr;
 }
 
-.player:hover .controls, player:focus .controls {
+.fila3{
+  display: grid;
+  grid-template-columns: 1fr 60px;
+  box-shadow: 3px 15px 15px black;
+  transition: 0.5s all;
+  height: 38px;
+  opacity: 0.5;
+}
+
+.fila3:hover {
   opacity: 1;
 }
 
@@ -67,18 +104,24 @@
 }
 
 .controls {
+  display: grid;
+  grid-template-columns: repeat(5, 30px) 1fr;
   visibility: hidden;
-  opacity: 0.5;
-  width: 100%;
+  background-color: black;
+  align-items: center;
+
+
+
+  /*width: 100%;
   border-radius: 10px;
   position: relative;
   bottom: 20px;
-  left: 41%;
+  left: 31%;
   margin-left: -200px;
   background-color: black;
   box-shadow: 3px 3px 5px black;
   transition: 1s all;
-  display: flex;
+  display: flex;*/
 }
 
 button:before {
@@ -95,22 +138,36 @@ button:before {
   font-family: monospace;
   text-shadow: 1px 1px 0px black;
   color: white;
-  flex: 5;
+  /*flex: 5;*/
   position: relative;
 }
 
 .timerdiv {
-  position: absolute;
   background-color: rgba(255,255,255,0.2);
-  left: 0;
-  top: 0;
   width: 0;
-  height: 38px;
-  z-index: 2;
+  height: 100%;
 }
 
 .timer span {
-  position: absolute;
-  z-index: 3;
-  left: 19px;
+  padding-left: 25px;
+}
+
+.derecha{
+  display: grid;
+  grid-template-columns: 30px 30px;
+}
+
+.barra1{
+  background-color: darkgray;
+  height: 7px;
+}
+
+.barra2{
+  background-color: crimson;
+  height: 100%;
+  width: 0%;
+}
+
+#estado1{
+  text-indent: 10px;
 }

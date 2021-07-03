@@ -9,6 +9,7 @@ let rd1 = document.querySelector("#rd1");
 
 window.onload = () => {
   rd1.checked = true;
+  media.ontimeupdate = actualizar;
 }
 
 let rd2 = document.querySelector("#rd2");
@@ -28,12 +29,21 @@ const fwd = document.querySelector('.fwd');
 const timerWrapper = document.querySelector('.timer');
 const timer = document.querySelector('.timer span');
 const timerBar = document.querySelector('.timerdiv');
+const sonido = document.querySelector('.sonido');
+const next = document.querySelector('.siguiente');
+const reducir = document.querySelector('.reducir');
+const barra1 = document.querySelector('.barra1');
 
 media.removeAttribute('controls');
 
 controls.style.visibility = 'visible';
 
 play.addEventListener('click', playPauseMedia);
+sonido.addEventListener('click', volumen);
+next.addEventListener('click', siguiente);
+reducir.addEventListener('click', expandir);
+barra1.addEventListener('click', buscar);
+media.addEventListener('click', playPauseMedia);
 
 function playPauseMedia() {
     if(media.paused) {
@@ -42,6 +52,25 @@ function playPauseMedia() {
     } else {
     play.setAttribute('data-icon','P');
     media.pause();
+    }
+}
+
+function siguiente() {
+  if (n + 1 == leng) {
+    n = 0;
+    selected(n);
+  } else {
+    selected(n+1);
+  }
+}
+
+function volumen() {
+    if(media.volume == 1) {
+      media.volume = 0;
+      sonido.setAttribute('data-icon','o');
+    } else {
+      media.volume = 1
+    sonido.setAttribute('data-icon','Q');
     }
 }
 
@@ -153,8 +182,8 @@ vid.addEventListener("ended",()=>{
     n++;
     vid.setAttribute("src", `media/videos/${vids[n%leng]}`);
     videoTitle.innerHTML = `Video ${n%leng + 1}`;
-    let enfocar = document.getElementById(`btn${n+1}`);
-    enfocar.focus({preventScroll:false});
+    /*let enfocar = document.getElementById(`btn${n+1}`);
+    enfocar.focus({preventScroll:false});*/
     atributos(n);
     playPauseMedia();
     }
@@ -163,19 +192,20 @@ vid.addEventListener("ended",()=>{
 const insertButton = document.getElementById('insertButton');
 
 function playList() {
-    for (let i = 0; i <= leng-1; i++) {
-        const anchor = document.createElement('button');
-        const htmlList = document.getElementById('list');
-        const li = document.createElement('li');
-        anchor.setAttribute('id', `btn${i+1}`);
-        anchor.setAttribute('onclick', `selected(${i})`);
-        anchor.innerText = `video ${i+1}`;
-        li.appendChild(anchor);
-        htmlList.appendChild(li);
+  videoTitle.removeAttribute("style");
+  for (let i = 0; i <= leng-1; i++) {
+      const anchor = document.createElement('button');
+      const htmlList = document.getElementById('list');
+      const li = document.createElement('li');
+      anchor.setAttribute('id', `btn${i+1}`);
+      anchor.setAttribute('onclick', `selected(${i})`);
+      anchor.innerText = `video ${i+1}`;
+      li.appendChild(anchor);
+      htmlList.appendChild(li);
 
-        btnList.style.display = 'none';
-        tituloh5.removeAttribute("style");
-    }
+      btnList.style.display = 'none';
+      tituloh5.removeAttribute("style");
+  }
 
 }
 
@@ -191,6 +221,8 @@ function selected(i) {
 function atributos(i) {
     let setAtt = document.getElementById(`btn${i+1}`);
     setAtt.setAttribute('class', 'active');
+    /*let enfocar = document.getElementById(`btn${i+1}`);*/
+    setAtt.focus({preventScroll:false});
 }
 
 function remActive() {
@@ -198,4 +230,37 @@ function remActive() {
         let btn_selec = document.getElementById(`btn${j+1}`);
             btn_selec.removeAttribute('class');
     }
+}
+
+function expandir(){
+  let section = document.querySelector('section');
+  if(section.style.transform == "scale(0.7)") {
+    section.style.transform = "scale(1)";
+    reducir.setAttribute('data-icon', 'M');
+    } else {
+    section.style.transform = "scale(0.7)";
+    reducir.setAttribute('data-icon', 'b');
+    }
+}
+
+function actualizar(){
+  document.querySelector("#estado1").innerHTML = ` ${conversion(media.currentTime)} / ${conversion(media.duration)}`;
+  let porcentaje = (100 * media.currentTime)/media.duration;
+  document.querySelector(".barra2").style.width = `${porcentaje}%`
+
+}
+
+function conversion(segundos){
+  let d = new Date(segundos*1000);
+  let segundo = (d.getSeconds()<=9) ? '0'+d.getSeconds() : d.getSeconds();
+  let minuto = (d.getMinutes()<=9) ? '0'+d.getMinutes() : d.getMinutes();
+  return `${minuto}:${segundo}`;
+}
+
+function buscar(e){
+  let dondeClick = e.offsetX;
+  let anchoVideo = barra1.offsetWidth;
+  let porcentaje = (100 * dondeClick) / anchoVideo;
+  let posicion = Math.floor(media.duration * (porcentaje/100));
+  media.currentTime = posicion;
 }
