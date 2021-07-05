@@ -1,0 +1,55 @@
+body {
+      overflow: hidden;
+    }
+
+.background {
+  position: absolute;
+
+  top: -50px;
+  right: -50px;
+  bottom: -50px;
+  left: -50px;
+
+  background-image: url("media/img/backgroun.webp");
+  background-position: center center;
+  background-size: cover;
+
+  filter: blur(15px);
+}
+
+audio{
+  position: absolute;
+  z-index: 2;
+  top: 500px;
+  left: 40%;
+}
+
+.track-title {
+  position: absolute;
+
+  top: 200px;
+  right: 0;
+  left: 0;
+
+  color: white;
+  font-family: Calibri;
+  font-size: 100px;
+  text-align: center;
+}
+
+.visualizer-container {
+  position: absolute;
+
+  bottom: 400px;
+  right: 0;
+  left: 0;
+
+  text-align: center;
+}
+
+.visualizer-container__bar {
+  display: inline-block;
+  background: white;
+  margin: 0 2px;
+  width: 15px;
+}
